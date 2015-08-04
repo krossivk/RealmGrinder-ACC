@@ -22,8 +22,6 @@ Global $click_timer = 0
 HotKeySet($acl_ss_key, "_startClicks")
 HotKeySet($acs_ss_key, "_startCasts")
 
-HotKeySet("{Esc}", "_exit")
-
 
 $Form1 = GUICreate("Autoclicker - Autocaster", 300, 300, 100, 300)
 
@@ -63,10 +61,6 @@ GUISetState(@SW_SHOW)
 ; FUNCTIONS
 ; ================
 
-Func _exit()
-	Exit
-EndFunc
-
 Func _IsChecked($idControlID)
     Return BitAND(GUICtrlRead($idControlID), $GUI_CHECKED) = $GUI_CHECKED
 EndFunc   ;==>_IsChecked
@@ -75,6 +69,21 @@ func _startCasts()
 	$b_acs = Not $b_acs
 	If $b_acs Then
 		$cast_timer = TimerInit()
+		If _IsChecked($spell1_CB) Then
+			Send("1")
+		EndIf
+		If _IsChecked($spell2_CB) Then
+			Send("2")
+		EndIf
+		If _IsChecked($spell3_CB) Then
+			Send("3")
+		EndIf
+		If _IsChecked($spell4_CB) Then
+			Send("4")
+		EndIf
+		If _IsChecked($spell5_CB) Then
+			Send("5")
+		EndIf
 	Else
 		$cast_timer = 0
 	EndIf
@@ -100,7 +109,7 @@ While 1
 		$click_timer = TimerInit()
 	EndIf
 
-	If $b_acs And TimerDiff($cast_timer) > ((Round(GUICtrlRead($mm_Input)/GUICtrlRead($mps_Input)+0.5))*1000) Then
+	If $b_acs And TimerDiff($cast_timer) > (((Round(GUICtrlRead($mm_Input)/GUICtrlRead($mps_Input)))*1000)+500) Then
 		If _IsChecked($spell1_CB) Then
 			Send("1")
 		EndIf
