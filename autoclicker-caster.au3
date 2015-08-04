@@ -33,6 +33,7 @@ $cps_Label		= GUICtrlCreateLabel("Clicks/Sec", 25, 40, 60, 20)
 $cps_Input	= GUICtrlCreateInput("30", 100, 37, 40, 20)
 ; Buttons
 $start_acl = GUICtrlCreateButton("Start/Stop " & $acl_ss_key, 25, 70, 100, 30)
+GUICtrlSetBkColor($start_acl, 0xFF0000)
 ; $define_acl = GUICtrlCreateButton("Define", 140, 70, 80, 30)
 
 
@@ -53,6 +54,7 @@ $spell4_CB	= GUICtrlCreateCheckbox("4", 145, 160, 30, 20)
 $spell5_CB	= GUICtrlCreateCheckbox("5", 185, 160, 30, 20)
 ; Buttons
 $start_acs = GUICtrlCreateButton("Start/Stop " & $acs_ss_key, 25, 250, 100, 30)
+GUICtrlSetBkColor($start_acs, 0xFF0000)
 ; $define_acs = GUICtrlCreateButton("Define", 140, 250, 80, 30)
 
 GUISetState(@SW_SHOW)
@@ -68,6 +70,7 @@ EndFunc   ;==>_IsChecked
 func _startCasts()
 	$b_acs = Not $b_acs
 	If $b_acs Then
+		GUICtrlSetBkColor($start_acs, 0x00FF00)
 		$cast_timer = TimerInit()
 		If _IsChecked($spell1_CB) Then
 			Send("1")
@@ -85,6 +88,7 @@ func _startCasts()
 			Send("5")
 		EndIf
 	Else
+		GUICtrlSetBkColor($start_acs, 0xFF0000)
 		$cast_timer = 0
 	EndIf
 EndFunc
@@ -93,8 +97,10 @@ EndFunc
 func _startClicks()
 	$b_acl = Not $b_acl
 	If $b_acl Then
+		GUICtrlSetBkColor($start_acl, 0x00FF00)
 		$click_timer = TimerInit()
 	Else
+		GUICtrlSetBkColor($start_acl, 0xFF0000)
 		$click_timer = 0
 	EndIf
 EndFunc
